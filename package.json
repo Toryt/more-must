@@ -1,0 +1,67 @@
+{
+  "name": "@toryt/more-must",
+  "version": "1.0.0-pre.0",
+  "description": "Extensions for must.js",
+  "main": "lib/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "pretest": "npm-check -i standard -i mocha-reporter -i legally -i tldrlegal; npm outdated || exit 0",
+    "test": "standard && nyc mocha --reporter dot 'test/**/*Test.js'",
+    "legalReport": "legally -l -r && tldrlegal",
+    "format": "prettier-standard \"**/*.{js,md,json}\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Toryt/more-must.git"
+  },
+  "keywords": [
+    "must",
+    "assert",
+    "assertion",
+    "bdd",
+    "test",
+    "testing",
+    "rfc2119"
+  ],
+  "author": {
+    "name": "Jan Dockx",
+    "email": "jandockx@gmail.com"
+  },
+  "contributors": [],
+  "license": "AGPL-3.0-or-later WITH additional_permissions",
+  "homepage": "https://github.com/Toryt/more-must",
+  "bugs": {
+    "url": "https://github.com/Toryt/more-must/issues"
+  },
+  "engines": {
+    "node": ">=6.14.3",
+    "npm": ">=3.10.10"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "legally": "^2.10.0",
+    "mocha": "^5.2.0",
+    "mocha-reporter": "^0.1.1",
+    "must": "^0.13.4",
+    "npm-check": "^5.7.1",
+    "nyc": "^12.0.2",
+    "prettier-standard": "^8.0.1",
+    "standard": "^11.0.1",
+    "tldrlegal": "^1.0.6"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "reporter": [
+      "html",
+      "text"
+    ]
+  },
+  "notes": {}
+}
