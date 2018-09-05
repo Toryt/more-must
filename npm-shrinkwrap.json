@@ -1,5 +1,46 @@
 {
   "name": "@toryt/more-must",
   "version": "1.0.0-pre.0",
-  "dependencies": {}
+  "dependencies": {
+    "egal": {
+      "version": "1.3.0",
+      "from": "egal@>=1.3.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/egal/-/egal-1.3.0.tgz"
+    },
+    "json-stringify-safe": {
+      "version": "5.0.1",
+      "from": "json-stringify-safe@>=5.0.0 <6.0.0",
+      "resolved": "https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz"
+    },
+    "kindof": {
+      "version": "2.0.0",
+      "from": "kindof@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/kindof/-/kindof-2.0.0.tgz"
+    },
+    "lodash._createwrapper": {
+      "version": "3.2.0",
+      "from": "lodash._createwrapper@>=3.0.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash._createwrapper/-/lodash._createwrapper-3.2.0.tgz"
+    },
+    "lodash._root": {
+      "version": "3.0.1",
+      "from": "lodash._root@>=3.0.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash._root/-/lodash._root-3.0.1.tgz"
+    },
+    "lodash.wrap": {
+      "version": "3.0.1",
+      "from": "lodash.wrap@>=3.0.0 <4.0.0",
+      "resolved": "https://registry.npmjs.org/lodash.wrap/-/lodash.wrap-3.0.1.tgz"
+    },
+    "must": {
+      "version": "0.13.4",
+      "from": "must@>=0.13.4 <0.14.0",
+      "resolved": "https://registry.npmjs.org/must/-/must-0.13.4.tgz"
+    },
+    "oolong": {
+      "version": "1.15.1",
+      "from": "oolong@>=1.11.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/oolong/-/oolong-1.15.1.tgz"
+    }
+  }
 }
