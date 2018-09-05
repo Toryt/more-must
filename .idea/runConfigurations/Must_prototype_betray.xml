@@ -1,0 +1,16 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Must.prototype.betray" type="mocha-javascript-test-runner" factoryName="Mocha" nameIsGenerated="true">
+    <node-interpreter>project</node-interpreter>
+    <node-options />
+    <working-directory>$PROJECT_DIR$</working-directory>
+    <pass-parent-env>true</pass-parent-env>
+    <ui>bdd</ui>
+    <extra-mocha-options>--watch</extra-mocha-options>
+    <test-kind>SUITE</test-kind>
+    <test-file>$PROJECT_DIR$/test/must/betray_test.js</test-file>
+    <test-names>
+      <name value="Must.prototype.betray" />
+    </test-names>
+    <method v="2" />
+  </configuration>
+</component>

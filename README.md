@@ -14,6 +14,4 @@ Extensions to [Must] (© 2013 Andri Möll).
 
 // MUDO
 
-
-
-[Must]: https://github.com/moll/js-must
+[must]: https://github.com/moll/js-must
