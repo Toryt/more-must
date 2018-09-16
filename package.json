@@ -7,9 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "pretest": "npm-check -i standard -i eslint -i mocha-reporter -i legally -i tldrlegal; npm outdated || exit 0",
+    "pretest": "npm-check -i standard -i eslint -i mocha-reporter; npm outdated || exit 0",
     "test": "standard && nyc mocha 'test/**/*_test.js'",
-    "legalReport": "legally -l -r && tldrlegal",
     "format": "prettier-standard \"**/*.{js,md,json}\""
   },
   "repository": {
@@ -44,14 +43,12 @@
   },
   "devDependencies": {
     "eslint": "^5.5.0",
-    "legally": "^3.0.0",
     "mocha": "^5.2.0",
     "mocha-reporter": "^0.1.1",
     "npm-check": "^5.7.1",
     "nyc": "^13.0.1",
     "prettier-standard": "^8.0.1",
-    "standard": "^12.0.1",
-    "tldrlegal": "^1.0.6"
+    "standard": "^12.0.1"
   },
   "nyc": {
     "check-coverage": true,
