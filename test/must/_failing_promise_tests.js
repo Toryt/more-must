@@ -6,9 +6,9 @@ const assertionErrorTest = require('must/test/must/_assertion_error_test')
 
 function dummy () {}
 
-const thenNoCatch = {then: dummy}
-const catchNoThen = {catch: dummy}
-const catchAndThen = {then: dummy, catch: dummy}
+const thenNoCatch = { then: dummy }
+const catchNoThen = { catch: dummy }
+const catchAndThen = { then: dummy, catch: dummy }
 
 module.exports = function (callToTest) {
   it('must fail given null', function () {
