@@ -16,6 +16,11 @@ Extensions to [Must] (© 2013 Andri Möll).
 
 // MUDO
 
+## TODO
+
+* documentation
+* finish and verify `index.d.ts`
+
 ## Notes
 
 ### SPDX
