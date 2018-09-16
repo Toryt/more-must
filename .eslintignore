@@ -1,0 +1,8 @@
+# prettier-standard does not support .prettierignore
+
+.idea/**
+node_modules
+coverage
+.nyc_output
+package.json
+npm-shrinkwrap.json
