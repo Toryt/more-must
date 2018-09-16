@@ -1,5 +1,7 @@
 # More Must
 
+[![Build Status](https://travis-ci.org/Toryt/more-must.svg?branch=master)](https://travis-ci.org/Toryt/more-must)
+
 _GNU Affero General Public License v3.0 or later, © 2018 Jan Dockx_
 
 Extensions to [Must] (© 2013 Andri Möll).
@@ -15,6 +17,20 @@ Extensions to [Must] (© 2013 Andri Möll).
 ## API
 
 // MUDO
+
+## Development
+
+Node 6, 8 and 10 are supported. This is checked because the code is tested on [Travis](https://travis-ci.org/Toryt/more-must)
+with the latest versions of these major versions.
+
+Development is currently done in Node 8 (see [`.nvmrc`](.nvmrc)). It cannot be done in Node 6 anymore.
+[Travis](https://travis-ci.org/Toryt/more-must) uses the command `npm ci` to test in Node 8 and Node 10, instead of
+`npm test`. `npm ci` requires a more advanced version of [`npm-shrinkwrap.json`](npm-shrinkwrap.json) or [`package-lock.json`](package-lock.json) than the version
+of `npm` shipped with Node 6 can generate. 
+
+The [`npm-shrinkwrap.json`](npm-shrinkwrap.json) in this repo is generated with `npm` 3.10.10 (from Node 6.14.4).
+The [`package-lock.json`](package-lock.json) in this repo is generated with the development environment (currently 
+`npm` 6.4.1 from Node 8.12.0).
 
 ## TODO
 
