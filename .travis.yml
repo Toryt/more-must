@@ -15,7 +15,7 @@ jobs:
     - node_js: '6' # npm test
     - node_js: '8' # npm test
       script:
-      - npm ci
+      - npm test
       - npm run reportCoverage
     - node_js: '10' # npm test
     # stage tag
