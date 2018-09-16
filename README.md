@@ -1,6 +1,7 @@
 # More Must
 
 [![Build Status](https://travis-ci.org/Toryt/more-must.svg?branch=master)](https://travis-ci.org/Toryt/more-must)
+[![codecov](https://codecov.io/gh/Toryt/more-must/branch/master/graph/badge.svg)](https://codecov.io/gh/Toryt/more-must)
 
 _GNU Affero General Public License v3.0 or later, © 2018 Jan Dockx_
 
