@@ -47,7 +47,7 @@
     "eslint": "^5.5.0",
     "mocha": "^5.2.0",
     "mocha-reporter": "^0.1.1",
-    "npm-check": "^5.7.1",
+    "npm-check": "^5.9.0",
     "nyc": "^13.0.1",
     "prettier-standard": "^8.0.1",
     "standard": "^12.0.1"
