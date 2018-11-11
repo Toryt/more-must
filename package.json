@@ -48,6 +48,7 @@
     "must": "^0.13.4"
   },
   "devDependencies": {
+    "@types/node": "^10.12.5",
     "codecov": "^3.1.0",
     "credits-cli": "^3.1.0",
     "dtslint": "^0.3.0",
