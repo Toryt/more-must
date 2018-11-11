@@ -3,6 +3,7 @@
   "version": "1.0.0-pre.0",
   "description": "Extensions for must.js",
   "main": "lib/index.js",
+  "types": "types",
   "directories": {
     "test": "test"
   },
