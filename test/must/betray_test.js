@@ -18,7 +18,7 @@ describe('Must.prototype.betray', function () {
     assert.pass(function () {
       Must(Promise.reject(rejection))
         .betray()
-        .then(raise(done), assertStrictEqual(done, rejection))
+        .then(assertStrictEqual(done, undefined), raise(done))
     })
   })
 
