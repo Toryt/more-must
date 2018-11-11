@@ -1,3 +1,6 @@
 .*
 node_modules
 coverage.lcov
+types/test.ts
+types/tsconfig.json
+types/*.js

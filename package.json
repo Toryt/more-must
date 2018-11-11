@@ -14,7 +14,8 @@
     "reportCoverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "postinstall": "npm run update_credits",
     "update_credits": "credits . --reporter markdown > CREDITS.md",
-    "upgrade": "rm -Rf node_modules package-lock.json && npm install && npm test"
+    "upgrade": "rm -Rf node_modules package-lock.json && npm install && npm test",
+    "test_dts": "dtslint types"
   },
   "repository": {
     "type": "git",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "codecov": "^3.1.0",
     "credits-cli": "^3.1.0",
+    "dtslint": "^0.3.0",
     "eslint": "^5.9.0",
     "mocha": "^5.2.0",
     "mocha-reporter": "^0.1.1",
