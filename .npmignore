@@ -4,6 +4,6 @@ coverage.lcov
 coverage
 scripts
 test
-types/originalMust.ts
+types/test/**
 types/tsconfig.json
 types/*.js
