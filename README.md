@@ -47,6 +47,12 @@ Development is currently done in Node 8 (see [`.nvmrc`](.nvmrc)). It cannot be d
 The [`package-lock.json`](package-lock.json) in this repo is generated with `npm` 6.4.1 from Node 8.12.0. This is not
 recognized by `npm` 3 (Node 6). There is no lock for Node 6.
 
+Credits
+=======
+
+`more-must` builds on the work of many people through [F/OSS]. See the [credits].
+
+
 ## TODO
 
 * documentation
@@ -69,3 +75,5 @@ uses `async`, and this package still has to work on node 6, which doesn't suppor
 used, because they suffer from a bug for [modules-in-modules](https://github.com/franciscop/legally/issues/17).
 
 [must]: https://github.com/moll/js-must
+[F/OSS]: https://opensource.org
+[credits]: ./CREDITS.md
