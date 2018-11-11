@@ -1,6 +1,9 @@
 .*
 node_modules
 coverage.lcov
+coverage
+scripts
+test
 types/test.ts
 types/tsconfig.json
 types/*.js
