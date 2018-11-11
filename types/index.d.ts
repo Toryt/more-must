@@ -1,5 +1,3 @@
-import { must } from "must";
-
 declare module "must" {
   interface Must {
     promise(): Must;
@@ -7,5 +5,3 @@ declare module "must" {
     betray<TResult>(this: Promise<TResult>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void>;
   }
 }
-
-export = must;
