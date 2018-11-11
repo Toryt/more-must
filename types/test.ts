@@ -442,3 +442,19 @@ date.must.undefined(date);
 
 // $ExpectType Must
 date.must.with;
+
+// No more-must functions
+// $ExpectError
+date.must.promise();
+// $ExpectError
+date.must.promise(date);
+
+// $ExpectError
+date.must.fulfill();
+// $ExpectError
+date.must.fulfill(date);
+
+// $ExpectError
+date.must.betray();
+// $ExpectError
+date.must.betray(date);
