@@ -1,4 +1,7 @@
-import { must } from "more-must";
+import "more-must";
+import { must as lessMust } from "must";
+
+lessMust(null).must.be.null();
 
 
 
