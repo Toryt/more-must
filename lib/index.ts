@@ -8,12 +8,159 @@ function isPromise (p: Promise<any>) {
   return p && typeof p.then === 'function' && typeof p.catch === 'function';
 }
 
-interface Must<Actual> { // MUDO
+type SaveComparablePrimitiveType = number | string | boolean;
+interface Value {
+  valueOf: SaveComparablePrimitiveType
+}
+type Comparable = SaveComparablePrimitiveType | Value
+
+type Constructor = Function
+
+interface Must<Actual> {
   actual: Actual,
+
+  a: CallableMust<Actual>,
+  an: CallableMust<Actual>,
+  at: Must<Actual>,
+  be: CallableMust<Actual>,
+  eventually: Must<Actual>,
+  have: Must<Actual>,
+  must: Must<Actual>,
+  not: Must<Actual>,
+  reject: Must<Actual>,
+  resolve: Must<Actual>,
+  the: Must<Actual>,
+  then: Must<Actual>,
+  to: Must<Actual>,
+  with: Must<Actual>,
+
   assert(condition: boolean, message: string, opts: object): void,
+
+  above(expected: Comparable): Must<Actual>,
+
+  after(expected: Comparable): Must<Actual>,
+
+  array(): Must<Actual>,
+
+  before(expected: Comparable): Must<Actual>,
+
+  below(expected: Comparable): Must<Actual>,
+
+  between(begin: Comparable, end: Comparable): Must<Actual>,
+
+  boolean(): Must<Actual>,
+
+  contain(expected): Must<Actual>,
+
+  date(): Must<Actual>,
+
+  empty(): Must<Actual>,
+
+  endWith(expected: string): Must<Actual>,
+
+  enumerable(property: string): Must<Actual>,
+
+  enumerableProperty(property: string): Must<Actual>,
+
+  eql(expected: any): Must<Actual>,
+
+  equal(expected: any): Must<Actual>,
+
+  error(constructor?: string | RegExp | Constructor, expected?: string | RegExp): Must<Actual>,
+
+  exist(): Must<Actual>,
+
+  false(): Must<Actual>,
+
+  falsy(): Must<Actual>,
+
+  frozen(): Must<Actual>,
+
+  function(): Must<Actual>,
+
+  gt(expected: Comparable): Must<Actual>,
+
+  gte(expected: Comparable): Must<Actual>,
+
+  include(expected: string | any[] | object): Must<Actual>,
+
+  instanceOf(expected: Constructor): Must<Actual>,
+
+  instanceof(expected: Constructor): Must<Actual>,
+
+  is(expected: any): Must<Actual>,
+
+  keys(expected: string[]): Must<Actual>,
+
+  least(expected: Comparable): Must<Actual>,
+
+  length(expected: number): Must<Actual>,
+
+  lt(expected: Comparable): Must<Actual>,
+
+  lte(expected: Comparable): Must<Actual>,
+
+  match(expected: RegExp | any): Must<Actual>,
+
+  most(expected: Comparable): Must<Actual>,
+
+  nan(): Must<Actual>,
+
+  nonenumerable(property: string): Must<Actual>,
+
+  nonenumerableProperty(property: string): Must<Actual>,
+
+  null(): Must<Actual>,
+
+  number(): Must<Actual>,
+
+  object(): Must<Actual>,
+
+  own(property: string, value?: any): Must<Actual>,
+
+  ownKeys(keys: string[]): Must<Actual>,
+
+  ownProperties(properties: any): Must<Actual>,
+
+  ownProperty(property: string, value?: any): Must<Actual>,
+
+  permutationOf(expected: any[]): Must<Actual>,
+
+  properties(properties: any): Must<Actual>,
+
+  property(property: string, value?: any): Must<Actual>,
+
+  regexp(): Must<Actual>,
+
+  startWith(expected: string): Must<Actual>,
+
+  string(): Must<Actual>,
+
+  symbol(): Must<Actual>,
+
+  throw(constructor?: Constructor | string | RegExp, expected?: string | RegExp): Must<Actual>,
+
+  true(): Must<Actual>,
+
+  truthy(): Must<Actual>,
+
+  undefined(): Must<Actual>,
+
   promise(): Must<Promise<any>>,
+
   fulfill<TResult>(this: Must<Promise<TResult>>, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void | TResult>,
+
   betray<TResult>(this: Must<Promise<TResult>>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void>
+}
+
+interface CallableMust<Actual> extends Must<Actual> {
+  (): Must<Actual>;
+}
+
+declare function must<Actual>(expected: Actual): Must<Actual>;
+
+declare namespace must {
+  type Type<Actual> = Must<Actual>;
 }
 
 /**
@@ -44,8 +191,8 @@ interface Must<Actual> { // MUDO
  *
  * @method promise
  */
-Must.prototype.promise = function promise (): Must<Promise<any>> {
-  this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
+Must.prototype.promise = function promise(): Must<Promise<any>> {
+  this.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual});
   return this.actual;
 };
 
@@ -92,7 +239,7 @@ Must.prototype.promise = function promise (): Must<Promise<any>> {
  */
 Must.prototype.fulfill = function fulfill<TResult>(this: Must<Promise<TResult>>, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void | TResult> {
   const must: Must<Promise<TResult>> = this;
-  must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
+  must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual});
   const caught = must.actual.catch(function (err: any) {
     must.assert(false, "resolve, but got rejected with '" + (err && err.message ? err.message : err) + "'", {
       actual: must.actual
@@ -144,17 +291,17 @@ Must.prototype.fulfill = function fulfill<TResult>(this: Must<Promise<TResult>>,
  */
 Must.prototype.betray = function betray<TResult>(this: Must<Promise<TResult>>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void> {
   const must: Must<Promise<TResult>> = this;
-  must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
+  must.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual});
   return must.actual.then(
     function (result: TResult) {
-      must.assert(false, "reject, but got fulfilled with '" + stringify(result) + "'", { actual: must.actual })
+      must.assert(false, "reject, but got fulfilled with '" + stringify(result) + "'", {actual: must.actual})
     },
     catchCondition ||
-      function (ignore: any) {
-        console.log(ignore);
-        // NOP: error is expected
-      }
+    function (ignore: any) {
+      console.log(ignore);
+      // NOP: error is expected
+    }
   );
 };
 
-export = Must;
+export = must;
