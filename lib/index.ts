@@ -12,9 +12,10 @@ type SaveComparablePrimitiveType = number | string | boolean;
 interface Value {
   valueOf: SaveComparablePrimitiveType
 }
-type Comparable = SaveComparablePrimitiveType | Value
+type Comparable = SaveComparablePrimitiveType | Value;
 
-type Constructor = Function
+type Constructor = { new(...args: any[]): any };
+type Container = string | any[] | object;
 
 interface Must<Actual> {
   actual: Actual,
@@ -50,7 +51,7 @@ interface Must<Actual> {
 
   boolean(): Must<Actual>,
 
-  contain(expected): Must<Actual>,
+  contain(expected: Container): Must<Actual>,
 
   date(): Must<Actual>,
 
@@ -82,7 +83,7 @@ interface Must<Actual> {
 
   gte(expected: Comparable): Must<Actual>,
 
-  include(expected: string | any[] | object): Must<Actual>,
+  include(expected: Container): Must<Actual>,
 
   instanceOf(expected: Constructor): Must<Actual>,
 
