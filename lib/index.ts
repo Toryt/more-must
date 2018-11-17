@@ -1,5 +1,5 @@
-const Must = require('must')
-const stringify = require('must/lib/index').stringify
+import Must = require("must")
+import {stringify} from "must/lib/index"
 
 const isPromiseMsg = "be a promise (i.e., have a 'then' and a 'catch' function)"
 
@@ -147,4 +147,4 @@ Must.prototype.betray = function (catchCondition) {
   )
 }
 
-module.exports = Must
+export = Must
