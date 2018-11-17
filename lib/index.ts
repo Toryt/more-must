@@ -10,7 +10,10 @@ function isPromise (p: Promise<any>) {
 
 interface Must<Actual> { // MUDO
   actual: Actual,
-  assert(condition: boolean, message: string, opts: object): void
+  assert(condition: boolean, message: string, opts: object): void,
+  promise(): Must<Promise<any>>,
+  fulfill<TResult>(this: Must<Promise<TResult>>, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void | TResult>,
+  betray<TResult>(this: Must<Promise<TResult>>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void>
 }
 
 /**
@@ -41,7 +44,7 @@ interface Must<Actual> { // MUDO
  *
  * @method promise
  */
-Must.prototype.promise = function (): Must<Promise<any>> {
+Must.prototype.promise = function promise (): Must<Promise<any>> {
   this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
   return this.actual;
 };
