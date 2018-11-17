@@ -1,7 +1,6 @@
 import Must = require("must");
 
 import {stringify} from "must/lib/index";
-// MUDO impor{Must}t {stringify} from 'must/lib/index'
 
 const isPromiseMsg = "be a promise (i.e., have a 'then' and a 'catch' function)";
 
@@ -9,8 +8,9 @@ function isPromise (p: Promise<any>) {
   return p && typeof p.then === 'function' && typeof p.catch === 'function';
 }
 
-interface Must { // MUDO
-  assert(condition: boolean): void
+interface Must<Actual> { // MUDO
+  actual: Actual,
+  assert(condition: boolean, message: string, opts: object): void
 }
 
 /**
@@ -41,7 +41,7 @@ interface Must { // MUDO
  *
  * @method promise
  */
-Must.prototype.promise = function (): Must {
+Must.prototype.promise = function (): Must<Promise<any>> {
   this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
   return this.actual;
 };
@@ -87,9 +87,8 @@ Must.prototype.promise = function (): Must {
  * @method fulfill
  * @param fulfilledCondition
  */
-Must.prototype.fulfill = function fulfill<TResult>(fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void> {
-// MUDO  Must.prototype.fulfill = function fulfill<TResult, This extends PromiseLike<TResult>>(this: This, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void> | This {
-  const must = this;
+Must.prototype.fulfill = function fulfill<TResult>(this: Must<Promise<TResult>>, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void | TResult> {
+  const must: Must<Promise<TResult>> = this;
   must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
   const caught = must.actual.catch(function (err: any) {
     must.assert(false, "resolve, but got rejected with '" + (err && err.message ? err.message : err) + "'", {
@@ -140,9 +139,8 @@ Must.prototype.fulfill = function fulfill<TResult>(fulfilledCondition?: ((value:
  * @method betray
  * @param catchCondition
  */
-Must.prototype.betray = function betray<TResult>(catchCondition?: (reason: any) => void | Promise<void>): Promise<void> {
-// MUDO Must.prototype.betray = function betray<TResult>(this: Promise<TResult>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void> {
-  const must = this;
+Must.prototype.betray = function betray<TResult>(this: Must<Promise<TResult>>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void> {
+  const must: Must<Promise<TResult>> = this;
   must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
   return must.actual.then(
     function (result: TResult) {
