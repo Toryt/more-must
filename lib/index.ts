@@ -1,10 +1,16 @@
-import Must = require("must")
-import {stringify} from "must/lib/index"
+import Must = require("must");
 
-const isPromiseMsg = "be a promise (i.e., have a 'then' and a 'catch' function)"
+import {stringify} from "must/lib/index";
+// MUDO impor{Must}t {stringify} from 'must/lib/index'
 
-function isPromise (p) {
-  return p && typeof p.then === 'function' && typeof p.catch === 'function'
+const isPromiseMsg = "be a promise (i.e., have a 'then' and a 'catch' function)";
+
+function isPromise (p: Promise<any>) {
+  return p && typeof p.then === 'function' && typeof p.catch === 'function';
+}
+
+interface Must { // MUDO
+  assert(condition: boolean): void
 }
 
 /**
@@ -35,10 +41,10 @@ function isPromise (p) {
  *
  * @method promise
  */
-Must.prototype.promise = function () {
-  this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual })
-  return this.actual
-}
+Must.prototype.promise = function (): Must {
+  this.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
+  return this.actual;
+};
 
 /**
  * Assert that an object is a promise (see `promise`), that eventually resolves.
@@ -81,16 +87,17 @@ Must.prototype.promise = function () {
  * @method fulfill
  * @param fulfilledCondition
  */
-Must.prototype.fulfill = function (fulfilledCondition) {
-  const must = this
-  must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual })
-  const caught = must.actual.catch(function (err) {
+Must.prototype.fulfill = function fulfill<TResult>(fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void> {
+// MUDO  Must.prototype.fulfill = function fulfill<TResult, This extends PromiseLike<TResult>>(this: This, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void> | This {
+  const must = this;
+  must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
+  const caught = must.actual.catch(function (err: any) {
     must.assert(false, "resolve, but got rejected with '" + (err && err.message ? err.message : err) + "'", {
       actual: must.actual
     })
-  })
-  return fulfilledCondition ? caught.then(fulfilledCondition) : caught
-}
+  });
+  return fulfilledCondition ? caught.then(fulfilledCondition) : caught;
+};
 
 /**
  * Assert that an object is a promise (see `promise`), that eventually rejects ("betrays" the promise).
@@ -133,18 +140,20 @@ Must.prototype.fulfill = function (fulfilledCondition) {
  * @method betray
  * @param catchCondition
  */
-Must.prototype.betray = function (catchCondition) {
-  const must = this
-  must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual })
+Must.prototype.betray = function betray<TResult>(catchCondition?: (reason: any) => void | Promise<void>): Promise<void> {
+// MUDO Must.prototype.betray = function betray<TResult>(this: Promise<TResult>, catchCondition?: (reason: any) => void | Promise<void>): Promise<void> {
+  const must = this;
+  must.assert(isPromise(this.actual), isPromiseMsg, { actual: this.actual });
   return must.actual.then(
-    function (result) {
+    function (result: TResult) {
       must.assert(false, "reject, but got fulfilled with '" + stringify(result) + "'", { actual: must.actual })
     },
     catchCondition ||
-      function (ignore) {
+      function (ignore: any) {
+        console.log(ignore);
         // NOP: error is expected
       }
-  )
-}
+  );
+};
 
-export = Must
+export = Must;
