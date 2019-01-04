@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 
 const Must = require('must')
-require('../../lib/index')
+require('../../built/index')
 const failingPromiseTests = require('./_failing_promise_tests')
 const assert = require('must/test/must/assert')
 

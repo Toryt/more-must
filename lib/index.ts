@@ -147,7 +147,7 @@ interface Must<Actual> {
 
   undefined(): Must<Actual>,
 
-  promise(): Must<Promise<any>>,
+  promise(): void,
 
   fulfill<TResult>(this: Must<Promise<TResult>>, fulfilledCondition?: ((value: TResult) => void | Promise<void>)): Promise<void | TResult>,
 
@@ -192,9 +192,8 @@ declare namespace must {
  *
  * @method promise
  */
-Must.prototype.promise = function promise(): Must<Promise<any>> {
+Must.prototype.promise = function promise(this: Must<Promise<any>>): void {
   this.assert(isPromise(this.actual), isPromiseMsg, {actual: this.actual});
-  return this.actual;
 };
 
 /**
